@@ -15,7 +15,6 @@ from langchain_community.llms import HuggingFaceHub
 from langchain_core.documents import Document
 from unstructured.partition.pdf import partition_pdf
 
-# Instalación de paquetes necesarios (comentar si ya están instalados)
 # os.system("pip install -Uq unstructured[all-docs] pillow lxml pillow")
 # os.system("pip install -Uq chromadb tiktoken langchain langchain-community langchain-openai langchain-groq")
 # os.system("pip install -Uq python_dotenv langchain-huggingface custom_st langchain-community huggingface_hub")
@@ -27,7 +26,7 @@ os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGCHAIN_TRACING_V2")
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 # Extracción de datos del PDF
-output_path = "./finalbot/docs/"
+output_path = "./documents/"
 file_path = output_path + 'Respuestas_basicas.pdf'
 
 chunks = partition_pdf(
