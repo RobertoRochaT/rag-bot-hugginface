@@ -1,0 +1,15 @@
+__pycache__
+.git
+.venv
+*.pyc
+*.pyo
+*.pyd
+venv
+__temp
+.gitignore
+app.ipynb
+main.py
+verify.py
+service.py
+documents
+_temp

@@ -7,6 +7,11 @@ venv/bin/*
 # Ignorar archivos de entorno
 .env
 
+_temp
+
+service.py
+verify.py
+
 __pycache__
 venv/bin/activate
 venv/bin/activate.csh

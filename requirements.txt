@@ -10,6 +10,7 @@ attrs==25.1.0
 backoff==2.2.1
 bcrypt==4.3.0
 beautifulsoup4==4.13.3
+bs4==0.0.1
 build==1.2.2.post1
 cachetools==5.5.2
 certifi==2025.1.31
@@ -35,6 +36,7 @@ eval_type_backport==0.2.2
 fastapi==0.115.11
 filelock==3.17.0
 filetype==1.2.0
+fire==0.5.0
 flatbuffers==25.2.10
 fonttools==4.56.0
 frozenlist==1.5.0
@@ -64,13 +66,16 @@ jsonpointer==3.0.0
 kiwisolver==1.4.8
 kubernetes==32.0.1
 langchain==0.3.20
+langchain-chroma==0.2.2
 langchain-community==0.3.19
 langchain-core==0.3.41
+langchain-experimental==0.0.37
 langchain-groq==0.2.4
 langchain-huggingface==0.1.2
 langchain-text-splitters==0.3.6
 langdetect==1.0.9
 langsmith==0.3.12
+loguru==0.7.3
 lxml==5.3.1
 Markdown==3.7
 markdown-it-py==3.0.0
@@ -86,12 +91,14 @@ mypy-extensions==1.0.0
 nest-asyncio==1.6.0
 networkx==3.4.2
 nltk==3.9.1
+numexpr==2.10.2
 numpy==1.26.4
 oauthlib==3.2.2
 olefile==0.47
 omegaconf==2.3.0
 onnx==1.17.0
 onnxruntime==1.20.1
+openai==0.28.1
 opencv-python==4.11.0.86
 openpyxl==3.1.5
 opentelemetry-api==1.30.0
@@ -162,6 +169,7 @@ SQLAlchemy==2.0.38
 starlette==0.46.0
 sympy==1.13.1
 tenacity==9.0.0
+termcolor==2.5.0
 threadpoolctl==3.5.0
 tiktoken==0.9.0
 timm==1.0.15

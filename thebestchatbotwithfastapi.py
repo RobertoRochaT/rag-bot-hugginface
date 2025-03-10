@@ -6,7 +6,7 @@ import certifi
 import shutil
 from pydantic import BaseModel
 from base64 import b64decode
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain.storage import InMemoryStore
 from langchain.retrievers.multi_vector import MultiVectorRetriever
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
@@ -15,7 +15,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 from langchain_core.messages import HumanMessage
-from langchain_community.llms import HuggingFaceHub
+from langchain_huggingface import HuggingFaceEndpoint
 from langchain_core.documents import Document
 from unstructured.partition.pdf import partition_pdf
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,6 +23,9 @@ from dotenv import load_dotenv
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from pymongo import MongoClient
+
+from langchain_core.runnables import RunnableMap
+
 
 load_dotenv()
 
@@ -51,7 +54,7 @@ TEMP_FOLDER = os.getenv('TEMP_FOLDER', './_temp')
 os.makedirs(TEMP_FOLDER, exist_ok=True)
 
 # Configuración de MongoDB
-MONGO_URI =  'mongodb+srv://Rocha:3CM3niSeTasVK9ND@cluster0.cw6gz.mongodb.net/chatbotlaguna' # os.getenv("MONGO_URI")
+MONGO_URI = os.getenv("MONGO_URI")
 client = MongoClient(MONGO_URI, tls=True, tlsCAFile=certifi.where())
 db = client.chatbotlaguna
 conversations_collection = db.conversations
@@ -73,10 +76,12 @@ retriever = MultiVectorRetriever(
 )
 
 # Configuración del modelo de Hugging Face
-llm = HuggingFaceHub(
+llm = HuggingFaceEndpoint(
     repo_id="mistralai/Mistral-7B-Instruct-v0.2",
-    model_kwargs={"temperature": 0.5, "max_length": 512}
+    temperature=0.5,  
+    model_kwargs={"max_length": 512} 
 )
+
 
 
 # Función para parsear documentos
@@ -124,15 +129,11 @@ def build_prompt(kwargs):
 
 
 # Cadena de procesamiento
-chain = (
-        {
-            "context": retriever | RunnableLambda(parse_docs),
-            "question": RunnablePassthrough(),
-        }
-        | RunnableLambda(build_prompt)
-        | llm
-        | StrOutputParser()
-)
+chain = RunnableMap({
+    "context": retriever | RunnableLambda(parse_docs),
+    "question": RunnablePassthrough(),
+}) | RunnableLambda(build_prompt) | llm | StrOutputParser()
+
 
 chain_with_sources = {
                          "context": retriever | RunnableLambda(parse_docs),
