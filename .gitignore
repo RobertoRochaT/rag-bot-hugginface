@@ -12,6 +12,21 @@ _temp
 service.py
 verify.py
 
+intent_classifier/
+intent_classifier/*
+
+images/
+images/*
+
+imagenes_descargadas/
+imagenes_descargadas/*
+
+documents/
+documents/*
+
+Other_Bots
+Other_Bots/*
+
 __pycache__
 venv/bin/activate
 venv/bin/activate.csh
