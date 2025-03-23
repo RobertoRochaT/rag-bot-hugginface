@@ -605,6 +605,16 @@ def scrape_webpage(url):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error scraping URL: {str(e)}")
 
+# Function to extract text
+def extract_text(soup):
+    print("Extracting text...")
+    try:
+        text = soup.get_text(separator="\n")
+        return text
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error extracting text: {str(e)}")
+
+
 # Función para extraer las imagenes de la página web
 def extract_images(soup, base_url):
     print("Extracting images...")
